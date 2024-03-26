@@ -1,7 +1,7 @@
 import './App.css';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import Map from './Map';
-import ImageReader from './ImageReader';
+import Map from './components/Map';
+import ImageReader from './features/ImageReader';
 
 
 const App = () => {
