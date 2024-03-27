@@ -1,11 +1,15 @@
 
 import React, { useState } from 'react';
 import Tesseract from 'tesseract.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToList } from './imageReaderSlice';
 
 const ImageReader = () => {
     const [files, setFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [result, setResult] = useState([]);
+
+    const dispatch = useDispatch();
     
     
     // Image to text stuff
@@ -41,11 +45,15 @@ const ImageReader = () => {
             })
     
             setResult([...result, ...newList]);
+            console.log('result', result)
+            dispatch(addToList(result))
             return;
           })
           return null;
       })
     }
+    
+    console.log(useSelector( state => state.addresses))
 
     return (
         <div className="App">
