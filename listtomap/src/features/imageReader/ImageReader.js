@@ -39,19 +39,23 @@ const ImageReader = () => {
           }})
           .then(({ data: { text } }) => {
             const newText = text.split('\n')
-            const newList = newText.filter( (address) => {
-              if (address.length > 1 && filterForAddress(address))
-                return address;
+            const newList = [];
+            newText.forEach( (address) => {
+              if (address.length > 1 && filterForAddress(address)) {
+                address = address.split(', ');
+                address.shift();
+                newList.push(address);
+              }
+              return null;
             })
     
-            setResult([...result, ...newList]);
-            console.log('result', result)
+            setResult([...result,...newList]);
             dispatch(addToList(result))
             return;
           })
           return null;
       })
-    }
+    } 
     
     console.log(useSelector( state => state.addresses))
 
