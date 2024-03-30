@@ -13,7 +13,7 @@ const Map = () => {
   const addresses = useSelector( (state) => state.addresses)
   const [lng, setLng] = useState(-73.9911);
   const [lat, setLat] = useState(40.7359);
-  const [zoom, setZoom] = useState(12.5);
+  const [zoom, setZoom] = useState(12);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -28,15 +28,24 @@ const Map = () => {
 
   useEffect(() => {
     if (addresses.addresses) {
-      addresses.addresses[1].forEach( (address) => {
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?type=address&access_token=${mapboxgl.accessToken}`)
-        .then( (res) => {
-          console.log(res)
-        })
-        console.log('address', address)
-        new mapboxgl.Marker()
-          .setLngLat([-74.004344,40.750015])
-          .addTo(map.current);
+      addresses.addresses.forEach( (address) => {
+        if (address.length > 0) {
+          address.forEach( (place) => {
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}.json?type=address&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
+            .then( (res) => res.json())
+            .then( (data) => {
+              console.log(data)
+              if (data.features && data.features.length > 0) {
+                const firstResult = data.features[0];
+                const longitude = firstResult.geometry.coordinates[0];
+                const latitude = firstResult.geometry.coordinates[1];
+                new mapboxgl.Marker()
+                  .setLngLat([longitude, latitude])
+                  .addTo(map.current);
+              }
+            })
+          })
+        }
       })
     }
   })
