@@ -31,7 +31,7 @@ const Map = () => {
       addresses.addresses.forEach( (address) => {
         if (address.length > 0) {
           address.forEach( (place) => {
-            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}.json?type=address&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}.json?country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
               if (data.features && data.features.length > 0) {
