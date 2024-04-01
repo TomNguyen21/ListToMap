@@ -44,6 +44,7 @@ const ImageReader = () => {
               if (address.length > 1 && filterForAddress(address)) {
                 address = address.split(', ');
                 address.shift();
+                address[0] += ', NY';
                 newList.push(address);
               }
               return null;

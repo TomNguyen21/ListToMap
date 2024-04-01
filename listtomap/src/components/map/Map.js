@@ -34,7 +34,6 @@ const Map = () => {
             fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}.json?type=address&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
-              console.log(data)
               if (data.features && data.features.length > 0) {
                 const firstResult = data.features[0];
                 const longitude = firstResult.geometry.coordinates[0];
