@@ -58,7 +58,6 @@ const ImageReader = () => {
       })
     } 
     
-    console.log(useSelector( state => state.addresses))
 
     return (
         <div className="App">
@@ -73,7 +72,7 @@ const ImageReader = () => {
             Result:
           </div>
           <>
-          { result.length > 0 && result.map( (resultLine, index) => (
+          { result.length > 0 && result.map( (resultLine) => (
             <>
               <div>
                 {resultLine}
