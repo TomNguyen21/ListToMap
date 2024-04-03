@@ -44,8 +44,18 @@ const ImageReader = () => {
               if (address.length > 1 && filterForAddress(address)) {
                 address = address.split(', ');
                 address.shift();
-                address[0] += ', NY';
-                newList.push(address);
+                let index = 0;
+                if (address[0].indexOf('St') !== -1) {
+                  index = address[0].indexOf('St') + 2;
+                } else if (address[0].indexOf('Ave') !== -1) {
+                  index = address[0].indexOf('Ave') + 3
+                } else {
+                  index = address[0].length;
+                }
+                console.log(index)
+                let newAddress = address.slice(0, index) + ', NY';
+                console.log(newAddress)
+                newList.push(newAddress);
               }
               return null;
             })
