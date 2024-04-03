@@ -31,16 +31,24 @@ const Map = () => {
       addresses.addresses.forEach( (address) => {
         if (address.length > 0) {
           address.forEach( (place) => {
-            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}.json?country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
+            console.log(place, 'place')
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
+              console.log(data)
               if (data.features && data.features.length > 0) {
                 const firstResult = data.features[0];
                 const longitude = firstResult.geometry.coordinates[0];
                 const latitude = firstResult.geometry.coordinates[1];
-                new mapboxgl.Marker()
+                let marker = new mapboxgl.Marker()
                   .setLngLat([longitude, latitude])
                   .addTo(map.current);
+                
+                let popup = new mapboxgl.Popup({
+                  offset:25
+                })
+                  .setHTML(`${place}`);
+                marker.setPopup(popup)
               }
             })
           })
