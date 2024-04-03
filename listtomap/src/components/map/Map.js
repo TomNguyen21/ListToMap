@@ -32,7 +32,7 @@ const Map = () => {
         if (address.length > 0) {
           address.forEach( (place) => {
             console.log(place, 'place')
-            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
               console.log(data)
@@ -47,7 +47,7 @@ const Map = () => {
                 let popup = new mapboxgl.Popup({
                   offset:25
                 })
-                  .setHTML(`${place}`);
+                  .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
                 marker.setPopup(popup)
               }
             })
