@@ -43,7 +43,8 @@ const ImageReader = () => {
             newText.forEach( (address) => {
               if (address.length > 1 && filterForAddress(address)) {
                 address = address.split(', ');
-                address.shift();
+                let galleryName = address.shift();
+                // WIP
                 let index = 0;
                 if (address[0].indexOf('St') !== -1) {
                   index = address[0].indexOf('St') + 2;
@@ -52,10 +53,8 @@ const ImageReader = () => {
                 } else {
                   index = address[0].length;
                 }
-                console.log(index)
-                let newAddress = address.slice(0, index) + ', NY';
-                console.log(newAddress)
-                newList.push(newAddress);
+                let newAddress = address[0].slice(0, index);
+                newList.push([newAddress, galleryName]);
               }
               return null;
             })
@@ -85,7 +84,7 @@ const ImageReader = () => {
           { result.length > 0 && result.map( (resultLine) => (
             <>
               <div>
-                {resultLine}
+                {resultLine[1]}, {resultLine[0]}
               </div>
               <br />
             </>
