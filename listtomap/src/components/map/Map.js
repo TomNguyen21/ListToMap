@@ -31,11 +31,9 @@ const Map = () => {
       addresses.addresses.forEach( (address) => {
         if (address.length > 0) {
           address.forEach( (place) => {
-            console.log(place, 'place')
             fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
-              console.log(data)
               if (data.features && data.features.length > 0) {
                 const firstResult = data.features[0];
                 const longitude = firstResult.geometry.coordinates[0];
