@@ -8,6 +8,7 @@ const ImageReader = () => {
     const [files, setFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [result, setResult] = useState([]);
+    const addresses = useSelector( (state) => state.addresses)
 
     const dispatch = useDispatch();
     
@@ -80,6 +81,7 @@ const ImageReader = () => {
           <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
             Result:
           </div>
+          {console.log('hello', addresses)}
           <>
           { result.length > 0 && result.map( (resultLine) => (
             <>
