@@ -46,6 +46,7 @@ const ImageReader = () => {
                 address = address.split(', ');
                 let galleryName = address.shift();
                 // WIP
+                // Should i change 'result' from an array into a Set? That way i dont need to worry about there being multiple objects?
                 let index = 0;
                 if (address[0].indexOf('St') !== -1) {
                   index = address[0].indexOf('St') + 2;
