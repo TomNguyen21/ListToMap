@@ -54,15 +54,7 @@ const Map = () => {
       })
     }
   })
-
   
-  // Do I need to create a redux store to be able to get the results from the image reader? And from there pass that data
-// into this addMarkers function to add markers to the map
-
-  // addMarkers.current = (coordinates) => {
-  //   coordinates.forEach( (coords) => new mapboxgl.Marker().setLngLat(coords).addTo(map));
-
-  // }
   return (
     <div>
         <div ref={mapContainer} className="map-container" />
