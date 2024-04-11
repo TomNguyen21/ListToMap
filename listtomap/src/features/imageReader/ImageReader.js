@@ -67,8 +67,8 @@ const ImageReader = () => {
           })
           return null;
       })
-    } 
-    
+    }
+
 
     return (
         <div className="App">
@@ -82,7 +82,6 @@ const ImageReader = () => {
           <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
             Result:
           </div>
-          {console.log('hello', addresses)}
           <>
           { result.length > 0 && result.map( (resultLine) => (
             <>
