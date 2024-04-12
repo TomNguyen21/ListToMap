@@ -47,6 +47,7 @@ const ImageReader = () => {
                 let galleryName = address.shift();
                 // WIP
                 // Should i change 'result' from an array into a Set? That way i dont need to worry about there being multiple objects?
+                // by changing to Set it would reduce chances for duplicates and then reduce the API call usage
                 let index = 0;
                 if (address[0].indexOf('St') !== -1) {
                   index = address[0].indexOf('St') + 2;
