@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tesseract from 'tesseract.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToList } from './imageReaderSlice';
@@ -63,13 +63,15 @@ const ImageReader = () => {
             })
     
             setResult([...result,...newList]);
-            dispatch(addToList(result))
             return;
           })
           return null;
       })
     }
-
+    useEffect(() => {
+      dispatch(addToList(result))
+    }, [result])
+    // dispatch(addToList(result))
 
     return (
         <div className="App">
