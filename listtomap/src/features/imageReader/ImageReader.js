@@ -1,21 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 import Tesseract from 'tesseract.js';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToList } from './imageReaderSlice';
 
 const ImageReader = () => {
     const [files, setFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [result, setResult] = useState([]);
-    const addresses = useSelector( (state) => state.addresses)
 
     const dispatch = useDispatch();
     
     
     // Image to text stuff
     const filterForAddress = (address) => {
-      // figure out how to manage the list into this array to find addresses
       const newAddress = address.toLowerCase();
     
       if (newAddress.indexOf(' st') !== -1 || newAddress.indexOf(' ave') !== -1) {
@@ -61,8 +59,11 @@ const ImageReader = () => {
               }
               return null;
             })
+            console.log(result, 'RESULT', newList, 'NEW LIST')
+            let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...result.map(JSON.stringify)]), JSON.parse)
+            console.log(uniqueAddress, result)
     
-            setResult([...result,...newList]);
+            setResult([...uniqueAddress]);
             return;
           })
           return null;
