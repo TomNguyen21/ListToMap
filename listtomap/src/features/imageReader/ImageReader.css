@@ -1,5 +1,6 @@
 .Uploader {
     display: flex;
+    flex-direction:column;
     height: 363px;
     width: 681px;
     margin: auto;
