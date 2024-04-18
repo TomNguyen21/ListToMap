@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import './ImageReader.css';
 import Tesseract from 'tesseract.js';
 import { useDispatch } from 'react-redux';
 import { addToList } from './imageReaderSlice';
@@ -75,10 +76,18 @@ const ImageReader = () => {
     // dispatch(addToList(result))
 
     return (
+      <>
+      { files ? ( 
         <div className="App">
-          <input type="file" onChange={onFileChange}/>
-          <div style={{marginTop: 25}}>
-            <input type="button" value="Submit" onClick={processImage} />
+          <div className="Uploader">
+            <div className="fileChooser">
+              <input type="file" onChange={onFileChange}/>
+            </div>
+            <span>Upload an image and we'll plot the addresses on a map!</span>
+            <div className="fileSubmit">
+              <input type="button" value="Submit" onClick={processImage} />
+            </div>
+            <span>or drag and drop a file here.</span>
           </div>
           <div>
             <progress value={progress} max={1} />
@@ -98,6 +107,10 @@ const ImageReader = () => {
           }
           </>
         </div>
+      ) : (
+        <div> asdf</div>
+      )}
+      </>
     )
 }
 
