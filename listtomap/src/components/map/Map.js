@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './Map.css';
 import { useSelector } from 'react-redux';
 
 
@@ -11,9 +12,9 @@ const Map = () => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const addresses = useSelector( (state) => state.addresses)
-  const [lng, setLng] = useState(-73.9911);
+  const [lng, setLng] = useState(-73.9611);
   const [lat, setLat] = useState(40.7359);
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(11.9);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
