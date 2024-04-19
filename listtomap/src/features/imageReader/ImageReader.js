@@ -25,7 +25,13 @@ const ImageReader = () => {
     }
     
     const onFileChange = (e) => {
+      console.log(e)
       setFiles([...files, e.target.files[0]])
+    }
+
+    const handleFileDrop = (droppedFiles) => {
+      setFiles([...files, ...droppedFiles]);
+      console.log(droppedFiles, 'what is this?')
     }
     
     const processImage = () => {
@@ -46,8 +52,6 @@ const ImageReader = () => {
                 address = address.split(', ');
                 let galleryName = address.shift();
                 // WIP
-                // Should i change 'result' from an array into a Set? That way i dont need to worry about there being multiple objects?
-                // by changing to Set it would reduce chances for duplicates and then reduce the API call usage
                 let index = 0;
                 if (address[0].indexOf('St') !== -1) {
                   index = address[0].indexOf('St') + 2;
@@ -65,7 +69,7 @@ const ImageReader = () => {
             let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...result.map(JSON.stringify)]), JSON.parse)
             console.log(uniqueAddress, result)
     
-            setResult([...uniqueAddress]);
+            setResult([...result,...uniqueAddress]);
             return;
           })
           return null;
@@ -76,20 +80,16 @@ const ImageReader = () => {
     }, [result])
     // dispatch(addToList(result))
 
-    const handleFileDrop = (droppedFiles) => {
-      setFiles([...files, droppedFiles]);
-      console.log(files)
-    }
 
     return (
       <>
       { files ? ( 
         <div className="App">
           <div className="Uploader">
-            <FileDrop onFileDrop={handleFileDrop} onChange={onFileChange}/>
-            {/* <div className="fileChooser">
-              <input type="file" onChange={onFileChange}/>
-            </div> */}
+            <FileDrop onFileDrop={handleFileDrop}/>
+            <div className="fileChooser">
+              <input type="file" onChange={onFileChange} multiple/>
+            </div>
             <span>Upload an image and we'll plot the addresses on a map!</span>
             <div className="fileSubmit">
               <input type="button" value="Submit" onClick={processImage} />
