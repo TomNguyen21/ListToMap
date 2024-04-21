@@ -25,13 +25,11 @@ const ImageReader = () => {
     }
     
     const onFileChange = (e) => {
-      console.log(e)
       setFiles([...files, e.target.files[0]])
     }
 
     const handleFileDrop = (droppedFiles) => {
       setFiles([...files, ...droppedFiles]);
-      console.log(droppedFiles, 'what is this?')
     }
     
     const processImage = () => {
@@ -65,9 +63,7 @@ const ImageReader = () => {
               }
               return null;
             })
-            console.log(result, 'RESULT', newList, 'NEW LIST')
             let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...result.map(JSON.stringify)]), JSON.parse)
-            console.log(uniqueAddress, result)
     
             setResult([...result,...uniqueAddress]);
             return;
