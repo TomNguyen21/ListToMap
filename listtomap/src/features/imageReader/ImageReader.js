@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './ImageReader.css';
 import Tesseract from 'tesseract.js';
 import FileDrop from '../../components/fileDrop/FileDrop';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addToList } from './imageReaderSlice';
 
 const ImageReader = () => {
@@ -12,6 +12,7 @@ const ImageReader = () => {
     const [result, setResult] = useState([]);
 
     const dispatch = useDispatch();
+    const addresses = useSelector( (state) => state.addresses)
     
     
     // Image to text stuff
@@ -25,14 +26,17 @@ const ImageReader = () => {
     }
     
     const onFileChange = (e) => {
-      setFiles([...files, e.target.files[0]])
+      setFiles([...files, ...e.target.files])
+      files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
       setFiles([...files, ...droppedFiles]);
+      files.forEach(previewImg)
     }
     
     const processImage = () => {
+      console.log(files, 'FILES')
       files.map( file => {
         Tesseract.recognize(
           file,
@@ -63,19 +67,32 @@ const ImageReader = () => {
               }
               return null;
             })
-            let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...result.map(JSON.stringify)]), JSON.parse)
-    
-            setResult([...result,...uniqueAddress]);
+            console.log(addresses.addresses)
+            let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.addresses.map(JSON.stringify)]), JSON.parse)
+            // console.log(uniqueAddress)
+            setResult([...uniqueAddress]);
             return;
           })
           return null;
       })
     }
+
     useEffect(() => {
       dispatch(addToList(result))
     }, [result])
     // dispatch(addToList(result))
 
+    const previewImg = (file) => {
+      let reader = new FileReader()
+      console.log(reader)
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        let img = document.createElement('img');
+        img.src = reader.result
+        img.className = 'previewImg'
+        document.getElementById('gallery').appendChild(img);
+      }
+    }
 
     return (
       <>
@@ -83,10 +100,10 @@ const ImageReader = () => {
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
+            <span>Upload an image and we'll plot the addresses on a map!</span>
             <div className="fileChooser">
               <input type="file" onChange={onFileChange} multiple/>
             </div>
-            <span>Upload an image and we'll plot the addresses on a map!</span>
             <div className="fileSubmit">
               <input type="button" value="Submit" onClick={processImage} />
             </div>
@@ -94,14 +111,15 @@ const ImageReader = () => {
           <div>
             <progress value={progress} max={1} />
           </div>
+          <div id="gallery" />
           </div>
           <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
             Result:
           </div>
           <>
-          { result.length > 0 && result.map( (resultLine) => (
+          { result.length > 0 && result.map( (resultLine, index) => (
             <>
-              <div>
+              <div key={index}>
                 {resultLine[1]}, {resultLine[0]}
               </div>
               <br />

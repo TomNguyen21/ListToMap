@@ -14,6 +14,7 @@ const FileDrop = ({ onFileDrop }) => {
 
   return (
     <div
+      className="fileChooser"
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       style={{ width: '300px', height: '300px', border: '2px dashed gray', textAlign: 'center' }}
