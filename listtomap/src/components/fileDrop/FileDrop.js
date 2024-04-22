@@ -1,5 +1,6 @@
 // FileDrop.js
 import React from 'react';
+import './FileDrop.css'
 
 const FileDrop = ({ onFileDrop }) => {
   const handleDragOver = (e) => {
@@ -14,10 +15,9 @@ const FileDrop = ({ onFileDrop }) => {
 
   return (
     <div
-      className="fileChooser"
+      className="fileDrop"
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      style={{ width: '300px', height: '300px', border: '2px dashed gray', textAlign: 'center' }}
     >
       Drop files here
     </div>
