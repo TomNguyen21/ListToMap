@@ -18,6 +18,7 @@ const FileDrop = ({ onFileDrop }) => {
       className="fileDrop"
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      alt="Preview Image"
     >
       Drop files here
     </div>
