@@ -7,7 +7,7 @@ import ImageReader from './features/imageReader/ImageReader';
 const App = () => {
   return (
     <>
-      <div>event map</div>
+      <div className="title">event map</div>
       <ImageReader />
       <Map />
     </>
