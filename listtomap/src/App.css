@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.title {
+  left: 166.76px;
+  top: 29px;
+  font-family: Rubik;
+  font-size: 28.94px;
+  font-weight: 700;
+  line-height: 34.29px;
+  text-align: left;
+}
