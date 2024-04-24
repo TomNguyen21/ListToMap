@@ -4,15 +4,16 @@ import './ImageReader.css';
 import Tesseract from 'tesseract.js';
 import FileDrop from '../../components/fileDrop/FileDrop';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToList } from './imageReaderSlice';
+import { addToList, addFiles } from './imageReaderSlice';
 
 const ImageReader = () => {
-    const [files, setFiles] = useState([]);
+    // const [files, setFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [result, setResult] = useState([]);
 
     const dispatch = useDispatch();
     const addresses = useSelector( (state) => state.addresses)
+    const files = useSelector( (state) => state.files)
     
     
     // Image to text stuff
@@ -26,13 +27,15 @@ const ImageReader = () => {
     }
     
     const onFileChange = (e) => {
-      setFiles([...files, ...e.target.files])
-      files.forEach(previewImg)
+      // setFiles([...files, ...e.target.files])
+      console.log(e.target.files)
+      dispatch(addFiles(...e.target.files))
+      // files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
-      setFiles([...files, ...droppedFiles]);
-      files.forEach(previewImg)
+      // setFiles([...files, ...droppedFiles]);
+      files?.forEach(previewImg)
     }
     
     const processImage = () => {
@@ -67,10 +70,12 @@ const ImageReader = () => {
               }
               return null;
             })
-            console.log(addresses.addresses)
             let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.addresses.map(JSON.stringify)]), JSON.parse)
-            // console.log(uniqueAddress)
-            setResult([...uniqueAddress]);
+            console.log(uniqueAddress)
+            // setResult([...uniqueAddress]);
+            dispatch(addToList([...uniqueAddress]))
+            
+            console.log(addresses.addresses)
             return;
           })
           return null;
@@ -96,7 +101,7 @@ const ImageReader = () => {
 
     return (
       <>
-      { files ? ( 
+      { !files ? ( 
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
