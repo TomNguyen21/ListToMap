@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const imageReaderSlice = createSlice({
     name: 'imageReader',
     initialState: {
-        addresses: []
+        addresses: [],
+        files: [],
     },
     reducers: {
         addToList: (state, action) => {
@@ -11,10 +12,16 @@ export const imageReaderSlice = createSlice({
         },
         selectList: (state) => {
             state.addresses = [...state.addresses]
-        }
+        },
+        addFiles: (state, action) => {
+            state.files = [...state.files, action.payload]
+        },
+        selectFiles: (state) => {
+            state.files = [...state.files]
+        },
     }
 })
 
-export const { addToList, selectList } = imageReaderSlice.actions;
+export const { addToList, selectList, addFiles, selectFiles } = imageReaderSlice.actions;
 
 export default imageReaderSlice.reducer;
