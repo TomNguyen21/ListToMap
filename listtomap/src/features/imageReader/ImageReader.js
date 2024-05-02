@@ -29,13 +29,17 @@ const ImageReader = () => {
     const onFileChange = (e) => {
       // setFiles([...files, ...e.target.files])
       console.log(e.target.files)
-      dispatch(addFiles(...e.target.files))
+      for (const [key, value] of Object.entries(e.target.files)) {
+        console.log(value)
+        dispatch(addFiles(value))
+      }
+      // dispatch(addFiles(...Object.entries(e.target.files)))
       // files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
       // setFiles([...files, ...droppedFiles]);
-      files?.forEach(previewImg)
+      files.forEach(previewImg)
     }
     
     const processImage = () => {
@@ -82,10 +86,9 @@ const ImageReader = () => {
       })
     }
 
-    useEffect(() => {
-      dispatch(addToList(result))
-    }, [result])
-    // dispatch(addToList(result))
+    // useEffect(() => {
+    //   dispatch(addToList(result))
+    // }, [result])
 
     const previewImg = (file) => {
       let reader = new FileReader()
