@@ -7,7 +7,7 @@ import ImageReader from './features/imageReader/ImageReader';
 const App = () => {
   return (
     <>
-      <div className="title">event map</div>
+      <div className="title"><img src='../public/icons/Huge-icon.png' alt='Icon'/>event map</div>
       <ImageReader />
       <Map />
     </>
