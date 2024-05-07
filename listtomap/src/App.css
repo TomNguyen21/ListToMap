@@ -38,6 +38,7 @@
 }
 
 .title {
+  display:flex;
   left: 166.76px;
   top: 29px;
   font-family: Rubik;
