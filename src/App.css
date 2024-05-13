@@ -39,8 +39,9 @@
 
 .title {
   display:flex;
-  left: 166.76px;
-  top: 29px;
+  padding-left: 17%;
+  padding-top: 1.25%;
+  padding-bottom: 2%;
   font-family: Rubik;
   font-size: 28.94px;
   font-weight: 700;
