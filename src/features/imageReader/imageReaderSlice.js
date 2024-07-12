@@ -8,16 +8,16 @@ export const imageReaderSlice = createSlice({
     },
     reducers: {
         addToList: (state, action) => {
-            state.addresses = [...state.addresses, action.payload]
+            return state.addresses = [...state.addresses, action.payload]
         },
         selectList: (state) => {
-            state.addresses = [...state.addresses]
+            return state.addresses = [...state.addresses]
         },
         addFiles: (state, action) => {
-            state.files = [...state.files, action.payload]
+            return state.files = [...state.files, action.payload]
         },
         selectFiles: (state) => {
-            state.files = [...state.files]
+            return state.files = [...state.files]
         },
     }
 })
