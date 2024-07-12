@@ -7,13 +7,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addToList, addFiles } from './imageReaderSlice';
 
 const ImageReader = () => {
-    const [files, setFiles] = useState([]);
+    // const [files, setFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [result, setResult] = useState([]);
 
     const dispatch = useDispatch();
     const addresses = useSelector( (state) => state.addresses)
-    // const files = useSelector( (state) => state.files)
+    const files = useSelector( (state) => state.files)
     
     
     // Image to text stuff
@@ -27,15 +27,17 @@ const ImageReader = () => {
     }
     
     const onFileChange = (e) => {
-      setFiles([...files, ...e.target.files])
-      // console.log(e.target.files)
+      // setFiles([...files, ...e.target.files])
+      console.log(e.target.files)
+      
+      dispatch(addFiles(e.target.files))
       // for (const [key, value] of Object.entries(e.target.files)) {
-      //   console.log(value)
+      //   console.log(key, value)
       //   dispatch(addFiles(value))
       // }
       console.log(files, '==============FILES=================')
       // dispatch(addFiles(...Object.entries(e.target.files)))
-      files.forEach(previewImg)
+      // files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
@@ -105,7 +107,7 @@ const ImageReader = () => {
 
     return (
       <>
-      { files ? ( 
+      { !files ? ( 
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
