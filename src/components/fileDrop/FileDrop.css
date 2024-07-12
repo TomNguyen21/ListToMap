@@ -4,3 +4,7 @@
     border: 2px dashed gray;
     text-align: center;
 }
+
+.filDrop:hover {
+    border: 2px solid transparent
+}
