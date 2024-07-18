@@ -46,6 +46,7 @@ const Map = () => {
                 let popup = new mapboxgl.Popup({
                   offset:25
                 })
+                //TODO: setup popup component
                   .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
                 marker.setPopup(popup)
               }
