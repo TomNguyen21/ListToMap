@@ -12,8 +12,8 @@ const ImageReader = () => {
     const [result, setResult] = useState([]);
 
     const dispatch = useDispatch();
-    const addresses = useSelector( (state) => state.addresses)
-    const files = useSelector( (state) => state.files)
+    const addresses = useSelector( (state) => state.files.addresses)
+    const files = useSelector( (state) => state.files.files)
     
     
     // Image to text stuff
@@ -35,19 +35,21 @@ const ImageReader = () => {
       //   console.log(key, value)
       //   dispatch(addFiles(value))
       // }
-      console.log(files, '==============FILES=================')
       // dispatch(addFiles(...Object.entries(e.target.files)))
       // files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
       // setFiles([...files, ...droppedFiles]);
+      console.log(droppedFiles)
+      dispatch(addFiles(droppedFiles))
+      console.log(files)
       files.forEach(previewImg)
     }
     
     const processImage = () => {
-      console.log(files, 'FILES')
       files.map( file => {
+        console.log(file)
         Tesseract.recognize(
           file,
           "eng",
@@ -89,14 +91,10 @@ const ImageReader = () => {
       })
     }
 
-    // useEffect(() => {
-    //   dispatch(addToList(result))
-    // }, [result])
 
     const previewImg = (file) => {
       let reader = new FileReader()
-      console.log(reader)
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file[0]);
       reader.onloadend = () => {
         let img = document.createElement('img');
         img.src = reader.result
@@ -107,7 +105,7 @@ const ImageReader = () => {
 
     return (
       <>
-      { !files ? ( 
+      { files ? ( 
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
@@ -123,6 +121,7 @@ const ImageReader = () => {
             <progress value={progress} max={1} />
           </div>
           </div>
+          <div id="gallery" />
         </div>
       ) : (
         <>
@@ -131,6 +130,7 @@ const ImageReader = () => {
             Result:
           </div>
           <>
+          {console.log(result)}
           { result.length > 0 && result.map( (resultLine, index) => (
             <>
               <div key={index}>

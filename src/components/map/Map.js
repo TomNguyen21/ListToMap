@@ -11,7 +11,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX
 const Map = () => {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const addresses = useSelector( (state) => state.addresses)
+  const addresses = useSelector( (state) => state.files.addresses)
   const [lng, setLng] = useState(-73.9611);
   const [lat, setLat] = useState(40.7359);
   const [zoom, setZoom] = useState(11.9);
@@ -28,8 +28,8 @@ const Map = () => {
   });
 
   useEffect(() => {
-    if (addresses.addresses) {
-      addresses.addresses.forEach( (address) => {
+    if (addresses) {
+      addresses.forEach( (address) => {
         if (address.length > 0) {
           address.forEach( (place) => {
             fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
