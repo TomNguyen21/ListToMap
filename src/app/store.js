@@ -7,7 +7,7 @@ const defaultMiddlewareConfig = {
 
 const store = configureStore({
     reducer: {
-        addresses: imageReaderReducer
+        files: imageReaderReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware(defaultMiddlewareConfig),

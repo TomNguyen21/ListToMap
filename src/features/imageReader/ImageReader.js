@@ -1,21 +1,27 @@
 
 import React, { useState, useEffect } from 'react';
-import './ImageReader.css';
 import Tesseract from 'tesseract.js';
 import FileDrop from '../../components/fileDrop/FileDrop';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToList, addFiles } from './imageReaderSlice';
+import { addAddress, addFiles } from './imageReaderSlice';
+
+import './ImageReader.css';
+import Demo1 from '../../assets/data/Demo1.png'
+import Demo2 from '../../assets/data/Demo2.png'
 
 const ImageReader = () => {
-    // const [files, setFiles] = useState([]);
+    let i = 0;
     const [progress, setProgress] = useState(0);
-    const [result, setResult] = useState([]);
 
     const dispatch = useDispatch();
-    const addresses = useSelector( (state) => state.addresses)
-    const files = useSelector( (state) => state.files)
+    const addresses = useSelector( (state) => state.files.addresses)
+    const files = useSelector( (state) => state.files.files)
     
-    
+    useEffect(() => {
+      console.log({ files });
+    }, [files]);
+
+
     // Image to text stuff
     const filterForAddress = (address) => {
       const newAddress = address.toLowerCase();
@@ -27,26 +33,21 @@ const ImageReader = () => {
     }
     
     const onFileChange = (e) => {
-      // setFiles([...files, ...e.target.files])
-      console.log(e.target.files)
-      
-      dispatch(addFiles(e.target.files))
-      // for (const [key, value] of Object.entries(e.target.files)) {
-      //   console.log(key, value)
-      //   dispatch(addFiles(value))
-      // }
-      console.log(files, '==============FILES=================')
-      // dispatch(addFiles(...Object.entries(e.target.files)))
-      // files.forEach(previewImg)
+      let currFiles = e.target.files;
+      for (let currFile of currFiles) {
+        dispatch(addFiles(currFile))
+      }
+      files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
-      // setFiles([...files, ...droppedFiles]);
+      for (let droppedFile of droppedFiles) {
+          dispatch(addFiles(droppedFile))
+      }
       files.forEach(previewImg)
     }
     
     const processImage = () => {
-      console.log(files, 'FILES')
       files.map( file => {
         Tesseract.recognize(
           file,
@@ -61,9 +62,10 @@ const ImageReader = () => {
             const newList = [];
             newText.forEach( (address) => {
               if (address.length > 1 && filterForAddress(address)) {
+                console.log(address)
                 address = address.split(', ');
                 let galleryName = address.shift();
-                // WIP
+                // WIP - Doesnt work with every image if not formated correctly - Due to line breaks and names of instituitions
                 let index = 0;
                 if (address[0].indexOf('St') !== -1) {
                   index = address[0].indexOf('St') + 2;
@@ -77,25 +79,18 @@ const ImageReader = () => {
               }
               return null;
             })
-            let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.addresses.map(JSON.stringify)]), JSON.parse)
+            let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.map(JSON.stringify)]), JSON.parse)
             console.log(uniqueAddress)
-            // setResult([...uniqueAddress]);
-            dispatch(addToList([...uniqueAddress]))
-            
-            console.log(addresses.addresses)
+            dispatch(addAddress([...uniqueAddress]))
             return;
           })
           return null;
       })
     }
 
-    // useEffect(() => {
-    //   dispatch(addToList(result))
-    // }, [result])
 
     const previewImg = (file) => {
       let reader = new FileReader()
-      console.log(reader)
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         let img = document.createElement('img');
@@ -106,8 +101,9 @@ const ImageReader = () => {
     }
 
     return (
+      //TODO: Add in demo images to use for OCR
       <>
-      { !files ? ( 
+      { files ? ( 
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
@@ -116,22 +112,31 @@ const ImageReader = () => {
               <input type="file" onChange={onFileChange} multiple/>
             </div>
             <div className="fileSubmit">
-              <input type="button" value="Submit" onClick={processImage} />
+              <input type="button" value="Upload" onClick={processImage} />
             </div>
             <span>or drag and drop a file here.</span>
+            {/* DEMO IMAGES HERE PROBABLY */}
+            {files.length < 1 ? (
+              <div className='demoGallery'>
+                  <div><img className='demoImg' src={Demo1} alt='Demo' /> </div>
+                  <div><img className='demoImg' src={Demo2} alt='Demo' /> </div>
+              </div>
+            ) : 
+            <div id="gallery" /> }
           <div>
             <progress value={progress} max={1} />
           </div>
           </div>
         </div>
       ) : (
+        //TODO: Create new compnent/feature to render the results and replace with React Component
         <>
           <div id="gallery" />
           <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
             Result:
           </div>
           <>
-          { result.length > 0 && result.map( (resultLine, index) => (
+          { addresses.length > 0 && addresses.map( (resultLine, index) => (
             <>
               <div key={index}>
                 {resultLine[1]}, {resultLine[0]}
@@ -141,7 +146,6 @@ const ImageReader = () => {
             ))
           }
           </>
-          <this.Map />
         </>
       )}
       </>

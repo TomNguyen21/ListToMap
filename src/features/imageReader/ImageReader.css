@@ -34,3 +34,23 @@
     padding: 20px 24px 20px 24px;
     gap: 24px;
 }
+
+.demoGallery {
+    display: flex;
+    height: 150px;
+}
+
+.demoGaller img {
+    object-fit: contain;
+}
+.demoImg {
+    height: 120px;
+    border: 1.5px solid #ECECEC;
+    border-radius: 16px;
+    padding: 20px 24px 20px 24px;
+    gap: 24px;
+}
+
+.demoImg img {
+    object-fit: contain;
+}
