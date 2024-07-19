@@ -29,9 +29,7 @@ const Map = () => {
 
   useEffect(() => {
     if (addresses) {
-      addresses.forEach( (address) => {
-        if (address.length > 0) {
-          address.forEach( (place) => {
+          addresses.forEach( (place) => {
             fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
@@ -52,8 +50,6 @@ const Map = () => {
               }
             })
           })
-        }
-      })
     }
   },)
   
