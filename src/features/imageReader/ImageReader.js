@@ -16,7 +16,7 @@ const ImageReader = () => {
     const dispatch = useDispatch();
     const addresses = useSelector( (state) => state.files.addresses)
     const files = useSelector( (state) => state.files.files)
-    
+
     useEffect(() => {
       console.log({ files });
     }, [files]);
@@ -25,13 +25,13 @@ const ImageReader = () => {
     // Image to text stuff
     const filterForAddress = (address) => {
       const newAddress = address.toLowerCase();
-    
+
       if (newAddress.indexOf(' st') !== -1 || newAddress.indexOf(' ave') !== -1) {
         return true;
       }
       return false;
     }
-    
+
     const onFileChange = (e) => {
       let currFiles = e.target.files;
       for (let currFile of currFiles) {
@@ -46,7 +46,7 @@ const ImageReader = () => {
       }
       files.forEach(previewImg)
     }
-    
+
     const processImage = () => {
       files.map( file => {
         Tesseract.recognize(
@@ -101,9 +101,8 @@ const ImageReader = () => {
     }
 
     return (
-      //TODO: Add in demo images to use for OCR
       <>
-      { files ? ( 
+      { files ? (
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
@@ -121,7 +120,7 @@ const ImageReader = () => {
                   <div><img className='demoImg' src={Demo1} alt='Demo' /> </div>
                   <div><img className='demoImg' src={Demo2} alt='Demo' /> </div>
               </div>
-            ) : 
+            ) :
             <div id="gallery" /> }
           <div>
             <progress value={progress} max={1} />
