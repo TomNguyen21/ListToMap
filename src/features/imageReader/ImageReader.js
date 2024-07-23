@@ -22,14 +22,6 @@ const ImageReader = () => {
 
 
     // Image to text stuff
-    const filterForAddress = (address) => {
-      const newAddress = address.toLowerCase();
-
-      if (newAddress.indexOf(' st') !== -1 || newAddress.indexOf(' ave') !== -1) {
-        return true;
-      }
-      return false;
-    }
 
     function parseAddresses(text) {
       // Regular expression pattern for matching street addresses
@@ -68,33 +60,9 @@ const ImageReader = () => {
           }})
           .then(({ data: { text } }) => {
             let matches = parseAddresses(text);
-            console.log(text)
-            console.log(matches)
-            // const newText = text.split('\n')
-            // const newList = [];
-            // newText.forEach( (address) => {
-            //   if (address.length > 1 && filterForAddress(address)) {
-            //     console.log(address)
-            //     address = address.split(', ');
-            //     let galleryName = address.shift();
-            //     // WIP - Doesnt work with every image if not formated correctly - Due to line breaks,names of instituitions, punctuation
-            //     // look into https://medium.com/@geoapify/5-methods-for-parsing-street-and-postal-addresses-c4d95ae518ef
-            //     let index = 0;
-            //     if (address[0].indexOf('St') !== -1) {
-            //       index = address[0].indexOf('St') + 2;
-            //     } else if (address[0].indexOf('Ave') !== -1) {
-            //       index = address[0].indexOf('Ave') + 3
-            //     } else {
-            //       index = address[0].length;
-            //     }
-            //     let newAddress = address[0].slice(0, index);
-            //     newList.push([newAddress, galleryName]);
-            //   }
-            //   return null;
-            // })
-            // let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.map(JSON.stringify)]), JSON.parse)
-            // console.log(uniqueAddress)
-            // dispatch(addAddress([...uniqueAddress]))
+            let uniqueAddress = Array.from(new Set([...matches.map(JSON.stringify), ...addresses.map(JSON.stringify)]), JSON.parse)
+            console.log(uniqueAddress)
+            dispatch(addAddress([...uniqueAddress]))
             return;
           })
           return null;
