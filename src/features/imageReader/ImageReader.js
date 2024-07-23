@@ -10,7 +10,6 @@ import Demo1 from '../../assets/data/Demo1.png'
 import Demo2 from '../../assets/data/Demo2.png'
 
 const ImageReader = () => {
-    let i = 0;
     const [progress, setProgress] = useState(0);
 
     const dispatch = useDispatch();
@@ -31,6 +30,16 @@ const ImageReader = () => {
       }
       return false;
     }
+
+    function parseAddresses(text) {
+      // Regular expression pattern for matching street addresses
+      const addressPattern = /\b\d{1,5}\s\w+(?:\s\w+)?\s(?:N|S|E|W|NE|NW|SE|SW)?\s?(?:Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Lane|Ln|Drive|Dr|Court|Ct|Circle|Cir|Way|Terrace|Ter|Place|Pl)\b/gi;
+
+      // Find all matches in the input text
+      const matches = text.match(addressPattern);
+
+      return matches || [];
+  }
 
     const onFileChange = (e) => {
       let currFiles = e.target.files;
@@ -58,30 +67,34 @@ const ImageReader = () => {
             }
           }})
           .then(({ data: { text } }) => {
-            const newText = text.split('\n')
-            const newList = [];
-            newText.forEach( (address) => {
-              if (address.length > 1 && filterForAddress(address)) {
-                console.log(address)
-                address = address.split(', ');
-                let galleryName = address.shift();
-                // WIP - Doesnt work with every image if not formated correctly - Due to line breaks and names of instituitions
-                let index = 0;
-                if (address[0].indexOf('St') !== -1) {
-                  index = address[0].indexOf('St') + 2;
-                } else if (address[0].indexOf('Ave') !== -1) {
-                  index = address[0].indexOf('Ave') + 3
-                } else {
-                  index = address[0].length;
-                }
-                let newAddress = address[0].slice(0, index);
-                newList.push([newAddress, galleryName]);
-              }
-              return null;
-            })
-            let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.map(JSON.stringify)]), JSON.parse)
-            console.log(uniqueAddress)
-            dispatch(addAddress([...uniqueAddress]))
+            let matches = parseAddresses(text);
+            console.log(text)
+            console.log(matches)
+            // const newText = text.split('\n')
+            // const newList = [];
+            // newText.forEach( (address) => {
+            //   if (address.length > 1 && filterForAddress(address)) {
+            //     console.log(address)
+            //     address = address.split(', ');
+            //     let galleryName = address.shift();
+            //     // WIP - Doesnt work with every image if not formated correctly - Due to line breaks,names of instituitions, punctuation
+            //     // look into https://medium.com/@geoapify/5-methods-for-parsing-street-and-postal-addresses-c4d95ae518ef
+            //     let index = 0;
+            //     if (address[0].indexOf('St') !== -1) {
+            //       index = address[0].indexOf('St') + 2;
+            //     } else if (address[0].indexOf('Ave') !== -1) {
+            //       index = address[0].indexOf('Ave') + 3
+            //     } else {
+            //       index = address[0].length;
+            //     }
+            //     let newAddress = address[0].slice(0, index);
+            //     newList.push([newAddress, galleryName]);
+            //   }
+            //   return null;
+            // })
+            // let uniqueAddress = Array.from(new Set([...newList.map(JSON.stringify), ...addresses.map(JSON.stringify)]), JSON.parse)
+            // console.log(uniqueAddress)
+            // dispatch(addAddress([...uniqueAddress]))
             return;
           })
           return null;
