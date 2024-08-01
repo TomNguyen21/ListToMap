@@ -70,32 +70,40 @@
 }
 
 .previewImg {
-    height: 120px;
+    height: 140px;
+    width: 140px;
     border: 1.5px solid #ECECEC;
     border-radius: 16px;
-    padding: 20px 24px 20px 24px;
+    margin: 0px 12px;
     gap: 24px;
 }
 
 .demoGallery {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 150px;
+    margin-top: 55px;
 }
 
 .demoGallery img {
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .demoImg {
-    height: 120px;
+    height: 140px;
+    width: 140px;
     border: 1.5px solid #ECECEC;
     border-radius: 16px;
-    padding: 20px 24px 20px 24px;
+    margin: 0px 12px;
     gap: 24px;
 }
 
 .demoImg img {
-    object-fit: contain;
+    object-fit: fill;
+}
+
+#gallery {
+    margin-top: 20px;
 }

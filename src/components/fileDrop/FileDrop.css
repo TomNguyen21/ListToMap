@@ -8,3 +8,83 @@
     /* text-align: center; */
 }
 
+.Uploader {
+    display: flex;
+    flex-direction:column;
+    height: 363px;
+    width: 681px;
+    margin: 25px auto;
+    align-items: center;
+    justify-content: center;
+    background: #F6F6F6;
+    border-radius: 24px;
+    border: 3px solid transparent;
+
+    .fileChooser {
+        white-space: no-wrap;
+    }
+    .fileSubmit {
+        flex-grow: 1;
+    }
+}
+
+.Uploader:hover {
+    background: #E8E8E8;
+    border: 3px solid #000000
+}
+
+.Uploader:hover .fileDrop {
+    border: 2px dashed transparent
+}
+
+.innerUpload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.uploadMsg {
+    width: 286px;
+    height: 50px;
+    top: 137px;
+    left: 198px;
+    gap: 0px;
+    opacity: 0px;
+
+    font-family: Plus Jakarta Sans;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 25.2px;
+    text-align: center;
+}
+
+.uploadIcon {
+    width: 37px;
+    height: 37px;
+    top: 89px;
+    left: 322px;
+    padding: 3.08px;
+    gap: 0px;
+    opacity: 0px;
+    margin-bottom: 15px;
+}
+
+.uploadButton {
+    width: 156px;
+    height: 48px;
+    top: 210px;
+    left: 263px;
+    padding: 14px 24px 14px 24px;
+    gap: 0px;
+    border-radius: 24px;
+    background: #000000;
+    color: #f6f6f6;
+    font-family: Plus Jakarta Sans;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.84px;
+    text-align: center;
+    margin: 25px auto;
+}
