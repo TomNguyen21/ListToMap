@@ -14,9 +14,12 @@ export const imageReaderSlice = createSlice({
             return state.addresses = [...state.addresses]
         },
         addFiles: (state, action) => {
-            let uniqueFiles = Array.from(new Set([...state.files.map(JSON.stringify), JSON.stringify(action.payload)], JSON.parse))
-            console.log(uniqueFiles)
+            // state = {
+            //     ...state,
+            //     files: [...state.files, action.payload]
+            // }
             state.files = [...state.files, action.payload]
+            console.log(state.files, action.payload)
         },
         selectFiles: (state) => {
             return state.files = [...state.files]

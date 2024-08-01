@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Tesseract from 'tesseract.js';
 import FileDrop from '../../components/fileDrop/FileDrop';
+import icon from '../../assets/icons/UploadIcon.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAddress, addFiles } from './imageReaderSlice';
 
@@ -87,15 +88,20 @@ const ImageReader = () => {
         <div className="App">
           <div className="Uploader">
             <FileDrop onFileDrop={handleFileDrop}/>
-            <span>Upload an image and we'll plot the addresses on a map!</span>
+            <img className='uploadIcon' src={icon} alt='Upload' />
+            <span className="uploadMsg">Upload an image and we'll plot the addresses on a map!</span>
             <div className="fileChooser">
               <input type="file" onChange={onFileChange} multiple/>
             </div>
             <div className="fileSubmit">
-              <input type="button" value="Upload" onClick={processImage} />
+              <input className='uploadButton' type="button" value="Upload image" onClick={processImage} />
             </div>
             <span>or drag and drop a file here.</span>
-            {/* DEMO IMAGES HERE PROBABLY */}
+
+          <div>
+            <progress value={progress} max={1} />
+          </div>
+          </div>{/* DEMO IMAGES HERE PROBABLY */}
             {files.length < 1 ? (
               <div className='demoGallery'>
                   <div><img className='demoImg' src={Demo1} alt='Demo' /> </div>
@@ -103,10 +109,6 @@ const ImageReader = () => {
               </div>
             ) :
             <div id="gallery" /> }
-          <div>
-            <progress value={progress} max={1} />
-          </div>
-          </div>
         </div>
       ) : (
         //TODO: Create new compnent/feature to render the results and replace with React Component

@@ -1,6 +1,10 @@
 .fileDrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 363px;
     width: 681px;
     border: 2px dashed transparent;
-    text-align: center;
+    /* text-align: center; */
 }
+
