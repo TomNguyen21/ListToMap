@@ -19,9 +19,7 @@ const FileDrop = ({ onFileDrop }) => {
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       alt="Preview Image"
-    >
-      Drop files here
-    </div>
+    />
   );
 };
 

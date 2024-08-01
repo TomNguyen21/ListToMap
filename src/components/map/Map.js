@@ -24,13 +24,13 @@ const Map = () => {
       center: [lng, lat],
       zoom: zoom
     });
-    
+
   });
 
   useEffect(() => {
     if (addresses) {
           addresses.forEach( (place) => {
-            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
               if (data.features && data.features.length > 0) {
@@ -40,19 +40,20 @@ const Map = () => {
                 let marker = new mapboxgl.Marker()
                   .setLngLat([longitude, latitude])
                   .addTo(map.current);
-                
                 let popup = new mapboxgl.Popup({
                   offset:25
                 })
                 //TODO: setup popup component
-                  .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
+                  // Old Code to get Venue name and address for popup
+                  // .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
+                  .setHTML(`<div style='justify-content: center'><h3>${place}</h3><p>${place}</p></div>`);
                 marker.setPopup(popup)
               }
             })
           })
     }
   },)
-  
+
   return (
     <div>
         <div ref={mapContainer} className="map-container" />
