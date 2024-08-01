@@ -23,6 +23,10 @@
     border: 3px solid #000000
 }
 
+.Uploader:hover .fileDrop {
+    border: 2px dashed transparent
+}
+
 .previewImg {
     height: 120px;
     border: 1.5px solid #ECECEC;
