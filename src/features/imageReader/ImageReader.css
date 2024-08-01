@@ -79,12 +79,15 @@
 
 .demoGallery {
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 150px;
 }
 
 .demoGallery img {
     object-fit: contain;
 }
+
 .demoImg {
     height: 120px;
     border: 1.5px solid #ECECEC;

@@ -19,6 +19,7 @@ const ImageReader = () => {
 
     useEffect(() => {
       console.log({ files });
+      files.forEach(previewImg)
     }, [files]);
 
 
@@ -39,14 +40,12 @@ const ImageReader = () => {
       for (let currFile of currFiles) {
         dispatch(addFiles(currFile))
       }
-      files.forEach(previewImg)
     }
 
     const handleFileDrop = (droppedFiles) => {
       for (let droppedFile of droppedFiles) {
           dispatch(addFiles(droppedFile))
       }
-      files.forEach(previewImg)
     }
 
     const processImage = () => {
@@ -79,6 +78,7 @@ const ImageReader = () => {
         img.src = reader.result
         img.className = 'previewImg'
         document.getElementById('gallery').appendChild(img);
+        console.log(files)
       }
     }
 
@@ -102,6 +102,7 @@ const ImageReader = () => {
             <progress value={progress} max={1} />
           </div>
           </div>{/* DEMO IMAGES HERE PROBABLY */}
+          {console.log(files)}
             {files.length < 1 ? (
               <div className='demoGallery'>
                   <div><img className='demoImg' src={Demo1} alt='Demo' /> </div>
