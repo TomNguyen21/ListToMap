@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Tesseract from 'tesseract.js';
 import FileDrop from '../../components/fileDrop/FileDrop';
-import icon from '../../assets/icons/UploadIcon.png';
+import Map from '../../components/map/Map';
+import Checkmark from '../../assets/icons/Checkmark.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAddress, addFiles } from './imageReaderSlice';
 
@@ -19,7 +20,6 @@ const ImageReader = () => {
 
     useEffect(() => {
       console.log(files);
-      files.forEach(previewImg)
     }, [files]);
 
 
@@ -68,6 +68,7 @@ const ImageReader = () => {
           })
           return null;
       })
+      // files.forEach(previewImg)
     }
 
 
@@ -84,26 +85,15 @@ const ImageReader = () => {
 
     return (
       <>
-      { files.length ? (
+      { addresses.length <= 0 ? (
         <div className="App">
-          <FileDrop onFileDrop={handleFileDrop} onFileChange={onFileChange} processImage={processImage} progress={progress}/>
-          {/* <div className="Uploader">
-            <FileDrop onFileDrop={handleFileDrop}/>
-            <img className='uploadIcon' src={icon} alt='Upload' />
-            <span className="uploadMsg">Upload an image and we'll plot the addresses on a map!</span>
-            <div className="fileChooser">
-              <input type="file" onChange={onFileChange} multiple hidden/>
-            </div>
-            <div className="fileSubmit">
-              <input className='uploadButton' type="button" value="Upload image" onClick={processImage} />
-            </div>
-            <span>or drag and drop a file here.</span>
-
-          <div>
-            <progress value={progress} max={1} />
-          </div> */}
+          <FileDrop 
+            onFileDrop={handleFileDrop} 
+            onFileChange={onFileChange} 
+            processImage={processImage} 
+            progress={progress}
+          />
           {/* </div>DEMO IMAGES HERE PROBABLY */}
-            {files.length <= 0 ? (
               <div className='demoGallery'>
                 <span className='uploadMsg' >No image? Try one of these:</span>
                 <div style={{display: 'flex', margin: 36}}>
@@ -111,18 +101,19 @@ const ImageReader = () => {
                   <div><img className='demoImg' src={Demo2} alt='Demo' /> </div>
                 </div>
               </div>
-            ) :
-            <div className="App">
-
-              <div id="gallery" /> 
             </div>
-            }
-        </div>
       ) : (
         //TODO: Create new compnent/feature to render the results and replace with React Component
-        <>
-          <div id="gallery" />
-          <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
+        <div className='App'>
+          <div className='results'>
+          <span className='uploadMsg'>
+            <img className='checkMarkIcon' src={Checkmark} alt='Checkmark' />
+          We've scanned your image and plotted the addresses below
+          </span>
+          <div style={{width: 88, border: '1px solid #ECECEC', transform: 'rotate(90deg)'}}/>
+            <div id="gallery" />
+          </div>
+          {/* <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
             Result:
           </div>
           <>
@@ -135,8 +126,10 @@ const ImageReader = () => {
             </>
             ))
           }
-          </>
-        </>
+          </> */}
+
+          <Map />
+        </div>
       )}
       </>
     )

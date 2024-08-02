@@ -28,6 +28,11 @@
 }
 
 .uploadMsg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
     width: 286px;
     height: 50px;
     top: 137px;
@@ -43,6 +48,16 @@
 }
 
 .uploadIcon {
+    width: 37px;
+    height: 37px;
+    top: 89px;
+    left: 322px;
+    padding: 3.08px;
+    gap: 0px;
+    opacity: 0px;
+}
+
+.checkMarkIcon {
     width: 37px;
     height: 37px;
     top: 89px;
@@ -106,4 +121,19 @@
 
 #gallery {
     margin-top: 20px;
+}
+
+.results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 922px;
+    height: 128px;
+    top: 90px;
+    left: 259.24px;
+    margin: 20px 24px 20px 24px;
+    gap: 24px;
+    border-radius: 16px;
+    opacity: 0px;
+    border: 1.5px solid #ECECEC
 }
