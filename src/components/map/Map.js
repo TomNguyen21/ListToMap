@@ -12,6 +12,8 @@ const Map = () => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const addresses = useSelector( (state) => state.files.addresses)
+
+  const [markers, setMarkers] = useState([]);
   const [lng, setLng] = useState(-73.9611);
   const [lat, setLat] = useState(40.7359);
   const [zoom, setZoom] = useState(11.9);
@@ -27,6 +29,10 @@ const Map = () => {
 
   });
 
+  const removeMarkers = () => {
+    setMarkers([]);
+  }
+
   useEffect(() => {
     if (addresses) {
           addresses.forEach( (place) => {
@@ -37,16 +43,24 @@ const Map = () => {
                 const firstResult = data.features[0];
                 const longitude = firstResult.geometry.coordinates[0];
                 const latitude = firstResult.geometry.coordinates[1];
-                let marker = new mapboxgl.Marker()
+
+                const el = document.createElement('div');
+                el.className = 'marker'
+
+                let marker = new mapboxgl.Marker(el)
                   .setLngLat([longitude, latitude])
                   .addTo(map.current);
+
+
+                // TODO: Function to remove all markers and add back only relevant files
+                  
                 let popup = new mapboxgl.Popup({
-                  offset:25
+                  offset:20
                 })
                 //TODO: setup popup component
                   // Old Code to get Venue name and address for popup
                   // .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
-                  .setHTML(`<div style='justify-content: center'><h3>${place}</h3><p>${place}</p></div>`);
+                  .setHTML(`<div><h3>${place}</h3><p>${place}</p></div>`);
                 marker.setPopup(popup)
               }
             })
