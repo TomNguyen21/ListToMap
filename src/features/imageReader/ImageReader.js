@@ -46,7 +46,10 @@ const ImageReader = () => {
     const handleFileDrop = (droppedFiles) => {
       for (let droppedFile of droppedFiles) {
           dispatch(addFiles(droppedFile))
-      }
+        }
+        console.log(files)
+        processImage();
+
     }
 
     const processImage = () => {
@@ -68,7 +71,7 @@ const ImageReader = () => {
           })
           return null;
       })
-      // files.forEach(previewImg)
+      files.forEach(previewImg)
     }
 
 
@@ -79,7 +82,7 @@ const ImageReader = () => {
         let img = document.createElement('img');
         img.src = reader.result
         img.className = 'previewImg'
-        document.getElementById('gallery').appendChild(img);
+        document.getElementById('results-gallery')?.appendChild(img);
       }
     }
 
@@ -111,7 +114,17 @@ const ImageReader = () => {
           We've scanned your image and plotted the addresses below
           </span>
           <div style={{width: 88, border: '1px solid #ECECEC', transform: 'rotate(90deg)'}}/>
-            <div id="gallery" />
+          <div className='upload-more'>
+            <div id="gallery results-gallery" />
+            <div className='results-upload'>
+              <span className='uploadMsg file-name' >{files[0].name}</span>
+              {/* WIP - Figure out how to get button to both upload and choose files */}
+              {/* <input className='uploadButton' style={{ width: 219}} type="button" value="Upload another image" onClick={processImage} /> */}
+              <input type="file" id='actual-btn' onChange={ (e) => {onFileChange(e); processImage()}} multiple hidden/>
+              <label for='actual-btn' className='uploadButton' >Upload another image</label>
+
+            </div>
+          </div>
           </div>
           {/* <div style={{ margin: 20, fontSize: 18, fontWeight: 'bolder' }} >
             Result:
