@@ -49,7 +49,6 @@ const ImageReader = () => {
         }
         console.log(files)
         processImage();
-
     }
 
     const processImage = () => {
@@ -82,7 +81,7 @@ const ImageReader = () => {
         let img = document.createElement('img');
         img.src = reader.result
         img.className = 'previewImg'
-        document.getElementById('results-gallery')?.appendChild(img);
+        addresses.length > 0 ? document.getElementById('results-gallery')?.appendChild(img) : document.getElementById('gallery')?.appendChild(img);
       }
     }
 

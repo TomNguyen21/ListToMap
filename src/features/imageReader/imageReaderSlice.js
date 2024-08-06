@@ -10,11 +10,11 @@ export const imageReaderSlice = createSlice({
         addAddress: (state, action) => {
             state.addresses = [...action.payload]
         },
-        selectList: (state) => {
+        getAddresses: (state) => {
             return state.addresses = [...state.addresses]
         },
         addFiles: (state, action) => {
-            state.files = [...state.files, action.payload]
+            state.files = [action.payload]
         },
         selectFiles: (state) => {
             return state.files = [...state.files]
@@ -22,6 +22,6 @@ export const imageReaderSlice = createSlice({
     }
 })
 
-export const { addAddress, selectList, addFiles, selectFiles } = imageReaderSlice.actions;
+export const { addAddress, getAddresses, addFiles, selectFiles } = imageReaderSlice.actions;
 
 export default imageReaderSlice.reducer;

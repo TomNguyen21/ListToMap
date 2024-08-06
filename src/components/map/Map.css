@@ -20,9 +20,12 @@
 }
 
 .mapboxgl-popup-content {
-    width: 116px;
+    width: 120px;
     height: 55px;
     gap: 4px;
     border-radius: 8px;
     padding: 10px 10px 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
