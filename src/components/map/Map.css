@@ -3,3 +3,29 @@
     width: 922px;
     height: 604px;
 }
+
+.marker {
+    background-image: url('../../assets/icons/Subtract.png');
+    width: 50px;
+    height: 65px;
+    left: -.35em;
+    cursor: pointer;
+}
+
+.marker-clicked {
+
+    background-image: url('../../assets/icons/SubtractActive.png');
+    left: -0.8em;
+    z-index: 100;
+}
+
+.mapboxgl-popup-content {
+    width: 120px;
+    height: 55px;
+    gap: 4px;
+    border-radius: 8px;
+    padding: 10px 10px 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

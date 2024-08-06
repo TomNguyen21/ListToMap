@@ -7,21 +7,21 @@ export const imageReaderSlice = createSlice({
         files: [],
     },
     reducers: {
-        addToList: (state, action) => {
-            state.addresses = [...state.addresses, action.payload]
+        addAddress: (state, action) => {
+            state.addresses = [...action.payload]
         },
-        selectList: (state) => {
-            state.addresses = [...state.addresses]
+        getAddresses: (state) => {
+            return state.addresses = [...state.addresses]
         },
         addFiles: (state, action) => {
-            state.files = [...state.files, action.payload]
+            state.files = [action.payload]
         },
         selectFiles: (state) => {
-            state.files = [...state.files]
+            return state.files = [...state.files]
         },
     }
 })
 
-export const { addToList, selectList, addFiles, selectFiles } = imageReaderSlice.actions;
+export const { addAddress, getAddresses, addFiles, selectFiles } = imageReaderSlice.actions;
 
 export default imageReaderSlice.reducer;

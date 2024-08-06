@@ -11,7 +11,9 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX
 const Map = () => {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const addresses = useSelector( (state) => state.addresses)
+  const addresses = useSelector( (state) => state.files.addresses)
+
+  const [markers, setMarkers] = useState([]);
   const [lng, setLng] = useState(-73.9611);
   const [lat, setLat] = useState(40.7359);
   const [zoom, setZoom] = useState(11.9);
@@ -24,38 +26,48 @@ const Map = () => {
       center: [lng, lat],
       zoom: zoom
     });
-    
+
   });
 
+  const removeMarkers = () => {
+    setMarkers([]);
+  }
+
   useEffect(() => {
-    if (addresses.addresses) {
-      addresses.addresses.forEach( (address) => {
-        if (address.length > 0) {
-          address.forEach( (place) => {
-            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place[0]}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
+    if (addresses) {
+          addresses.forEach( (place) => {
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}%20NY.json?poi_category=art_gallery&country=US&region=NY&&proximity=${lng},${lat}&access_token=${mapboxgl.accessToken}`)
             .then( (res) => res.json())
             .then( (data) => {
               if (data.features && data.features.length > 0) {
                 const firstResult = data.features[0];
                 const longitude = firstResult.geometry.coordinates[0];
                 const latitude = firstResult.geometry.coordinates[1];
-                let marker = new mapboxgl.Marker()
+
+                const el = document.createElement('div');
+                el.className = 'marker'
+
+                let marker = new mapboxgl.Marker(el)
                   .setLngLat([longitude, latitude])
                   .addTo(map.current);
-                
+
+
+                // TODO: Function to remove all markers and add back only relevant files
+                  
                 let popup = new mapboxgl.Popup({
-                  offset:25
+                  offset:20
                 })
-                  .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
+                //TODO: setup popup component
+                  // Old Code to get Venue name and address for popup
+                  // .setHTML(`<div style='justify-content: center'><h3>${place[1]}</h3><p>${place[0]}</p></div>`);
+                  .setHTML(`<div><h3>${place}</h3><p>${place}</p></div>`);
                 marker.setPopup(popup)
               }
             })
           })
-        }
-      })
     }
   },)
-  
+
   return (
     <div>
         <div ref={mapContainer} className="map-container" />
