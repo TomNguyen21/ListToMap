@@ -20,6 +20,7 @@ const ImageReader = () => {
 
     useEffect(() => {
       console.log(files);
+      processImage()
     }, [files]);
 
 
@@ -48,7 +49,6 @@ const ImageReader = () => {
           dispatch(addFiles(droppedFile))
         }
         console.log(files)
-        processImage();
     }
 
     const processImage = () => {
@@ -112,7 +112,7 @@ const ImageReader = () => {
             <img className='checkMarkIcon' src={Checkmark} alt='Checkmark' />
           We've scanned your image and plotted the addresses below
           </span>
-          <div style={{width: 88, border: '1px solid #ECECEC', transform: 'rotate(90deg)'}}/>
+          <div className='divider-bar' />
           <div className='upload-more'>
             <div id="gallery results-gallery" />
             <div className='results-upload'>

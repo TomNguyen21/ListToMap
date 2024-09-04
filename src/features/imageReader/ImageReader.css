@@ -1,6 +1,6 @@
 .Uploader {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     height: 363px;
     width: 681px;
     margin: 25px auto;
@@ -9,62 +9,20 @@
     background: #F6F6F6;
     border-radius: 24px;
     border: 3px solid transparent;
-
-    .fileChooser {
-        white-space: no-wrap;
-    }
-    .fileSubmit {
-        flex-grow: 1;
-    }
-}
-
-.Uploader:hover {
-    background: #E8E8E8;
-    border: 3px solid #000000
-}
-
-.Uploader:hover .fileDrop {
-    border: 2px dashed transparent
 }
 
 .uploadMsg {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
     align-items: center;
     width: 286px;
     height: 50px;
-    top: 137px;
-    left: 198px;
-    gap: 0px;
-    opacity: 0px;
-
     font-family: Plus Jakarta Sans;
     font-size: 20px;
     font-weight: 400;
     line-height: 25.2px;
     text-align: center;
-}
-
-.uploadIcon {
-    width: 37px;
-    height: 37px;
-    top: 89px;
-    left: 322px;
-    padding: 3.08px;
-    gap: 0px;
-    opacity: 0px;
-}
-
-.checkMarkIcon {
-    width: 37px;
-    height: 37px;
-    top: 89px;
-    left: 322px;
-    padding: 3.08px;
-    gap: 0px;
-    opacity: 0px;
 }
 
 .uploadButton {
@@ -73,10 +31,7 @@
     align-items: center;
     width: 156px;
     height: 48px;
-    top: 210px;
-    left: 263px;
     padding: 0 24px;
-    gap: 0px;
     border-radius: 24px;
     background: #000000;
     color: #f6f6f6;
@@ -88,76 +43,66 @@
     margin: auto;
 }
 
-.previewImg {
+.previewImg, .demoImg {
     height: 140px;
     width: 140px;
     border: 1.5px solid #ECECEC;
     border-radius: 16px;
     margin: 0px 12px;
-    gap: 24px;
 }
 
-.demoGallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
-    margin-top: 55px;
-}
-
-.demoGallery img {
-    object-fit: fill;
-}
-
-.demoImg {
-    height: 140px;
-    width: 140px;
-    border: 1.5px solid #ECECEC;
-    border-radius: 16px;
-    margin: 0px 12px;
-    gap: 24px;
-}
-
-.demoImg img {
-    object-fit: fill;
-}
-
-#gallery {
-    margin-top: 20px;
-}
-
-.upload-more {
-    display: flex;
-}
-
-.file-name {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
 .results {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 922px;
     height: 128px;
-    top: 90px;
-    left: 259.24px;
-    margin: 20px 24px 20px 24px;
-    gap: 24px;
+    margin: 20px 24px;
     border-radius: 16px;
-    opacity: 0px;
-    border: 1.5px solid #ECECEC
+    border: 1.5px solid #ECECEC;
 }
 
-.results-upload {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.divider-bar {
+    width: 6em;
+    border: 1px solid #ECECEC;
+    transform: rotate(90deg);
 }
 
-.results-gallery {
-    width: 88px;
-    height: 88px;
+@media (max-width: 768px) {
+    .Uploader {
+        height: auto;
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .uploadMsg {
+        width: auto;
+        height: auto;
+        font-size: 16px;
+    }
+
+    .uploadButton {
+        width: auto;
+        height: auto;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .previewImg, .demoImg {
+        height: 100px;
+        width: 100px;
+    }
+
+    .divider-bar {
+        width: 15em;
+        transform: rotate(0deg);
+        margin: 1em;
+    }
+
+    .results {
+        width: 100%;
+        height: 12rem;
+        flex-direction: column;
+        align-items: center;
+    }
 }
