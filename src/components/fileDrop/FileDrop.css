@@ -88,3 +88,10 @@
     text-align: center;
     margin: 25px auto;
 }
+
+@media (min-width: 768px) {
+    .fileDrop, .Uploader {
+        height: 363px;
+        width: 681px;
+    }
+}
