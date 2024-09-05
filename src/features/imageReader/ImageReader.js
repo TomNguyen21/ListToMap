@@ -29,11 +29,11 @@ const ImageReader = () => {
     function parseAddresses(text) {
       // Regular expression pattern for matching street addresses
       //TODO: Still need to refine this so it will get more of the addresses and the names of venues
-      const addressPattern = /\b\d{1,5}\s\w+(?:\s\w+)?\s(?:N|S|E|W|NE|NW|SE|SW)?\s?(?:Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Lane|Ln|Drive|Dr|Court|Ct|Circle|Cir|Way|Terrace|Ter|Place|Pl)\b/gi;
+      const addressPattern = /\b\d{1,5}\s(?:[NSEW]\s|North\s|South\s|East\s|West\s)?(?:\w+\.?\s){0,3}(?:Street|St|Avenue|Ave|Boulevard|Blvd|Lane|Ln|Road|Rd|Drive|Dr|Court|Ct|Circle|Cir|Place|Pl|P1|Terrace|Ter|Parkway|Pkwy|Way)(?:\s(?:Apt|Apartment|Unit|Floor|Fl|#|Suite|Ste|Room|Rm)\s*\d*)?\b/gi;
 
       // Find all matches in the input text
       const matches = text.match(addressPattern);
-
+      console.log(matches)
       return matches || [];
   }
 
