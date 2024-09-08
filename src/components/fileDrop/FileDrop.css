@@ -95,3 +95,9 @@
         width: 681px;
     }
 }
+
+@media (max-width: 425px) {
+    .fileDrop, .Uploader {
+        width: 90%;
+    }
+}

@@ -106,3 +106,14 @@
         align-items: center;
     }
 }
+
+@media (max-width: 425px) {
+    .results {
+        width: 90%;
+    }
+
+    .mapboxgl-map {
+        height: 60vh;
+        width: 60vh;
+    }
+}
