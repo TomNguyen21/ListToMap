@@ -1,3 +1,10 @@
+# Notes
+
+I think a good way to incorporate database is to have a history of events/screenshots to pull up.
+
+Also for future events, you could have the screenshot already saved and once the date comes it will pull up the events.
+(Maybe have a date function?)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
